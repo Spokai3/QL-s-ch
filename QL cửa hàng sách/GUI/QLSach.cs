@@ -1,17 +1,24 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using QL_cửa_hàng_sách;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MongoDB.Driver;
+using MongoDB.Driver.Core.Configuration;
 
 namespace QL_sách
 {
     public partial class QLSach : Form
     {
+        IMongoCollection<Book> bookCollection;
         public QLSach()
         {
             InitializeComponent();
@@ -53,7 +60,19 @@ namespace QL_sách
                                 {
                                     if (Date.Text != "")
                                     {
-                                        dataGridViewThongTin.Rows.Add(txtBookID.Text, txtISBN.Text, txtTenSach.Text, txtTacGia.Text, cbNgonNgu.Text, txtNXB.Text, Date.Text);
+                                        var book = new Book
+                                        {
+                                            BookID = Int32.Parse(txtBookID.Text),
+                                            ISBN = txtISBN.Text,
+                                            Tên_Sách = txtTenSach.Text,
+                                            Tác_Giả = txtTacGia.Text,
+                                            Ngôn_Ngữ = cbNgonNgu.Text,
+                                            Nhà_Xuất_Bản = txtNXB.Text,
+                                            Ngày_Công_Bố = Date.Text
+                                        };
+                                        bookCollection.InsertOne(book);
+                                        LoadBookData();
+                                        /*dataGridViewThongTin.Rows.Add(txtBookID.Text, txtISBN.Text, txtTenSach.Text, txtTacGia.Text, cbNgonNgu.Text, txtNXB.Text, Date.Text);*/
                                         MessageBox.Show("Thêm thành công");
                                     }
                                     else
@@ -94,21 +113,16 @@ namespace QL_sách
 
         public void SuaThongTin()
         {
-            if (dataGridViewThongTin.SelectedCells.Count > 0)
-            {
-                int vitri = dataGridViewThongTin.CurrentCell.RowIndex;
-                dataGridViewThongTin[0, vitri].Value = txtBookID.Text;
-                dataGridViewThongTin[1, vitri].Value = txtISBN.Text;
-                dataGridViewThongTin[2, vitri].Value = txtTenSach.Text;
-                dataGridViewThongTin[3, vitri].Value = txtTacGia.Text;
-                dataGridViewThongTin[4, vitri].Value = cbNgonNgu.Text;
-                dataGridViewThongTin[5, vitri].Value = txtNXB.Text;
-                dataGridViewThongTin[6, vitri].Value = Date.Text;
-            }
-            else
-            {
-                MessageBox.Show("Không có gì để sửa");
-            }
+            var filterDefinition = Builders<Book>.Filter.Eq(a => a.BookID, Int32.Parse(txtBookID.Text));
+            var updateDefinition = Builders<Book>.Update
+                .Set(a => a.ISBN, txtISBN.Text)
+                .Set(a => a.Tên_Sách, txtTenSach.Text)
+                .Set(a => a.Tác_Giả, txtTacGia.Text)
+                .Set(a => a.Ngôn_Ngữ, cbNgonNgu.Text)
+                .Set(a => a.Nhà_Xuất_Bản, txtNXB.Text)
+                .Set(a => a.Ngày_Công_Bố, Date.Text);
+            bookCollection.UpdateOne(filterDefinition, updateDefinition);
+            LoadBookData();
         }
 
         private void dataGridViewTimKiem_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -121,7 +135,7 @@ namespace QL_sách
             SuaThongTin();
         }
 
-        private void dataGridViewThongTin_CellClick(object sender, DataGridViewCellEventArgs e)
+       /* private void dataGridViewThongTin_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridViewThongTin.SelectedCells.Count > 0)
             {
@@ -134,7 +148,7 @@ namespace QL_sách
                 txtNXB.Text = row.Cells[5].Value.ToString(); 
                 Date.Text = row.Cells[6].Value.ToString();
             }
-        }
+        }*/
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
@@ -142,7 +156,37 @@ namespace QL_sách
             {
                 int index = dataGridViewThongTin.CurrentCell.RowIndex;
                 dataGridViewThongTin.Rows.RemoveAt(index);
+                
             }
+        }
+
+        public void LoadBookData()
+        {
+            var filterDefinition = Builders<Book>.Filter.Empty;
+            var books = bookCollection.Find(filterDefinition).ToList();
+            dataGridViewThongTin.DataSource = books;
+            dataGridViewTimKiem.DataSource = books;
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void QLSach_Load(object sender, EventArgs e)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
+            var databaseName = MongoUrl.Create(connectionString).DatabaseName;
+            var mongoClient = new MongoClient(connectionString);
+            var database = mongoClient.GetDatabase(databaseName);
+            bookCollection = database.GetCollection<Book>("book");
+
+            LoadBookData();
+        }
+
+        private void dataGridViewTimKiem_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }
