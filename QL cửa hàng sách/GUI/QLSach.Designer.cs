@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Date1 = new System.Windows.Forms.TabControl();
+            this.components = new System.ComponentModel.Container();
+            this.TabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridViewThongTin = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnLoad = new System.Windows.Forms.Button();
+            this.btnLamMoi = new System.Windows.Forms.Button();
             this.cbNgonNgu = new System.Windows.Forms.ComboBox();
             this.Date = new System.Windows.Forms.DateTimePicker();
             this.txtBookID = new System.Windows.Forms.TextBox();
@@ -51,25 +52,33 @@
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txtFieldName1 = new System.Windows.Forms.TextBox();
+            this.txtFieldName5 = new System.Windows.Forms.TextBox();
+            this.txtFieldName6 = new System.Windows.Forms.TextBox();
+            this.txtFieldName7 = new System.Windows.Forms.TextBox();
+            this.txtFieldName3 = new System.Windows.Forms.TextBox();
+            this.txtFieldName2 = new System.Windows.Forms.TextBox();
+            this.txtFieldName4 = new System.Windows.Forms.TextBox();
             this.dataGridViewTimKiem = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnLoad1 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.cbNgonNgu1 = new System.Windows.Forms.ComboBox();
-            this.txtTenSach1 = new System.Windows.Forms.TextBox();
-            this.txtBookID1 = new System.Windows.Forms.TextBox();
-            this.txtISBN1 = new System.Windows.Forms.TextBox();
-            this.txtTacGia1 = new System.Windows.Forms.TextBox();
-            this.txtNXB1 = new System.Windows.Forms.TextBox();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.Date1.SuspendLayout();
+            this.btnLamMoi1 = new System.Windows.Forms.Button();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btnTimKiem = new System.Windows.Forms.Button();
+            this.textBox7 = new System.Windows.Forms.DateTimePicker();
+            this.textBox5 = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewThongTin)).BeginInit();
             this.panel2.SuspendLayout();
@@ -78,15 +87,15 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Date1
+            // TabControl
             // 
-            this.Date1.Controls.Add(this.tabPage1);
-            this.Date1.Controls.Add(this.tabPage2);
-            this.Date1.Location = new System.Drawing.Point(0, 0);
-            this.Date1.Name = "Date1";
-            this.Date1.SelectedIndex = 0;
-            this.Date1.Size = new System.Drawing.Size(801, 438);
-            this.Date1.TabIndex = 0;
+            this.TabControl.Controls.Add(this.tabPage1);
+            this.TabControl.Controls.Add(this.tabPage2);
+            this.TabControl.Location = new System.Drawing.Point(0, 0);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(801, 438);
+            this.TabControl.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -108,10 +117,11 @@
             this.dataGridViewThongTin.Name = "dataGridViewThongTin";
             this.dataGridViewThongTin.Size = new System.Drawing.Size(781, 175);
             this.dataGridViewThongTin.TabIndex = 1;
+            this.dataGridViewThongTin.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewThongTin_CellClick);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.btnLoad);
+            this.panel2.Controls.Add(this.btnLamMoi);
             this.panel2.Controls.Add(this.cbNgonNgu);
             this.panel2.Controls.Add(this.Date);
             this.panel2.Controls.Add(this.txtBookID);
@@ -134,20 +144,42 @@
             this.panel2.Size = new System.Drawing.Size(781, 198);
             this.panel2.TabIndex = 2;
             // 
-            // btnLoad
+            // btnLamMoi
             // 
-            this.btnLoad.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLoad.Location = new System.Drawing.Point(613, 172);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(75, 23);
-            this.btnLoad.TabIndex = 3;
-            this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            this.btnLamMoi.Location = new System.Drawing.Point(597, 172);
+            this.btnLamMoi.Name = "btnLamMoi";
+            this.btnLamMoi.Size = new System.Drawing.Size(75, 23);
+            this.btnLamMoi.TabIndex = 3;
+            this.btnLamMoi.Text = "Làm Mới";
+            this.btnLamMoi.UseVisualStyleBackColor = true;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // cbNgonNgu
             // 
             this.cbNgonNgu.FormattingEnabled = true;
+            this.cbNgonNgu.Items.AddRange(new object[] {
+            "ara",
+            "en-US",
+            "en-CA",
+            "en-GB",
+            "enm",
+            "eng",
+            "fre",
+            "ger",
+            "glg",
+            "grc",
+            "ita",
+            "jpn",
+            "lat",
+            "mul",
+            "nl",
+            "nor",
+            "por",
+            "swe",
+            "srp",
+            "spa",
+            "wel",
+            "zho"});
             this.cbNgonNgu.Location = new System.Drawing.Point(330, 66);
             this.cbNgonNgu.Name = "cbNgonNgu";
             this.cbNgonNgu.Size = new System.Drawing.Size(100, 21);
@@ -213,7 +245,6 @@
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Ngày Công Bố";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label6
             // 
@@ -272,7 +303,7 @@
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(284, 172);
+            this.btnSua.Location = new System.Drawing.Point(266, 172);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(75, 23);
             this.btnSua.TabIndex = 2;
@@ -282,7 +313,7 @@
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(458, 172);
+            this.btnXoa.Location = new System.Drawing.Point(428, 172);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(75, 23);
             this.btnXoa.TabIndex = 3;
@@ -292,6 +323,13 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.txtFieldName1);
+            this.tabPage2.Controls.Add(this.txtFieldName5);
+            this.tabPage2.Controls.Add(this.txtFieldName6);
+            this.tabPage2.Controls.Add(this.txtFieldName7);
+            this.tabPage2.Controls.Add(this.txtFieldName3);
+            this.tabPage2.Controls.Add(this.txtFieldName2);
+            this.tabPage2.Controls.Add(this.txtFieldName4);
             this.tabPage2.Controls.Add(this.dataGridViewTimKiem);
             this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -302,6 +340,55 @@
             this.tabPage2.Text = "Tìm kiếm sách";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // txtFieldName1
+            // 
+            this.txtFieldName1.Location = new System.Drawing.Point(24, 231);
+            this.txtFieldName1.Name = "txtFieldName1";
+            this.txtFieldName1.Size = new System.Drawing.Size(100, 20);
+            this.txtFieldName1.TabIndex = 29;
+            // 
+            // txtFieldName5
+            // 
+            this.txtFieldName5.Location = new System.Drawing.Point(447, 231);
+            this.txtFieldName5.Name = "txtFieldName5";
+            this.txtFieldName5.Size = new System.Drawing.Size(100, 20);
+            this.txtFieldName5.TabIndex = 28;
+            // 
+            // txtFieldName6
+            // 
+            this.txtFieldName6.Location = new System.Drawing.Point(553, 231);
+            this.txtFieldName6.Name = "txtFieldName6";
+            this.txtFieldName6.Size = new System.Drawing.Size(100, 20);
+            this.txtFieldName6.TabIndex = 27;
+            // 
+            // txtFieldName7
+            // 
+            this.txtFieldName7.Location = new System.Drawing.Point(659, 231);
+            this.txtFieldName7.Name = "txtFieldName7";
+            this.txtFieldName7.Size = new System.Drawing.Size(100, 20);
+            this.txtFieldName7.TabIndex = 26;
+            // 
+            // txtFieldName3
+            // 
+            this.txtFieldName3.Location = new System.Drawing.Point(235, 231);
+            this.txtFieldName3.Name = "txtFieldName3";
+            this.txtFieldName3.Size = new System.Drawing.Size(100, 20);
+            this.txtFieldName3.TabIndex = 25;
+            // 
+            // txtFieldName2
+            // 
+            this.txtFieldName2.Location = new System.Drawing.Point(130, 231);
+            this.txtFieldName2.Name = "txtFieldName2";
+            this.txtFieldName2.Size = new System.Drawing.Size(100, 20);
+            this.txtFieldName2.TabIndex = 24;
+            // 
+            // txtFieldName4
+            // 
+            this.txtFieldName4.Location = new System.Drawing.Point(341, 231);
+            this.txtFieldName4.Name = "txtFieldName4";
+            this.txtFieldName4.Size = new System.Drawing.Size(100, 20);
+            this.txtFieldName4.TabIndex = 23;
+            // 
             // dataGridViewTimKiem
             // 
             this.dataGridViewTimKiem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -310,195 +397,236 @@
             this.dataGridViewTimKiem.Name = "dataGridViewTimKiem";
             this.dataGridViewTimKiem.Size = new System.Drawing.Size(781, 175);
             this.dataGridViewTimKiem.TabIndex = 0;
-            this.dataGridViewTimKiem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTimKiem_CellClick);
-            this.dataGridViewTimKiem.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTimKiem_CellContentClick);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnLoad1);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.cbNgonNgu1);
-            this.panel1.Controls.Add(this.txtTenSach1);
-            this.panel1.Controls.Add(this.txtBookID1);
-            this.panel1.Controls.Add(this.txtISBN1);
-            this.panel1.Controls.Add(this.txtTacGia1);
-            this.panel1.Controls.Add(this.txtNXB1);
-            this.panel1.Controls.Add(this.radioButton7);
-            this.panel1.Controls.Add(this.radioButton6);
-            this.panel1.Controls.Add(this.radioButton5);
-            this.panel1.Controls.Add(this.radioButton4);
-            this.panel1.Controls.Add(this.radioButton3);
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton1);
+            this.panel1.Controls.Add(this.btnLamMoi1);
+            this.panel1.Controls.Add(this.checkBox3);
+            this.panel1.Controls.Add(this.checkBox7);
+            this.panel1.Controls.Add(this.checkBox6);
+            this.panel1.Controls.Add(this.checkBox5);
+            this.panel1.Controls.Add(this.checkBox4);
+            this.panel1.Controls.Add(this.checkBox2);
+            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.btnTimKiem);
+            this.panel1.Controls.Add(this.textBox7);
+            this.panel1.Controls.Add(this.textBox5);
+            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.textBox4);
+            this.panel1.Controls.Add(this.textBox6);
             this.panel1.Location = new System.Drawing.Point(6, 6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(781, 198);
             this.panel1.TabIndex = 0;
             // 
-            // btnLoad1
+            // btnLamMoi1
             // 
-            this.btnLoad1.Location = new System.Drawing.Point(653, 156);
-            this.btnLoad1.Name = "btnLoad1";
-            this.btnLoad1.Size = new System.Drawing.Size(75, 23);
-            this.btnLoad1.TabIndex = 15;
-            this.btnLoad1.Text = "Load";
-            this.btnLoad1.UseVisualStyleBackColor = true;
+            this.btnLamMoi1.Location = new System.Drawing.Point(653, 155);
+            this.btnLamMoi1.Name = "btnLamMoi1";
+            this.btnLamMoi1.Size = new System.Drawing.Size(75, 23);
+            this.btnLamMoi1.TabIndex = 22;
+            this.btnLamMoi1.Text = "Làm Mới";
+            this.btnLamMoi1.UseVisualStyleBackColor = true;
+            this.btnLamMoi1.Click += new System.EventHandler(this.btnLamMoi1_Click);
             // 
-            // button1
+            // checkBox3
             // 
-            this.button1.Location = new System.Drawing.Point(527, 157);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Tìm Kiếm";
-            this.button1.UseVisualStyleBackColor = true;
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(18, 157);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(73, 17);
+            this.checkBox3.TabIndex = 21;
+            this.checkBox3.Tag = "3";
+            this.checkBox3.Text = "Tên Sách";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
-            // dateTimePicker1
+            // checkBox7
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(628, 89);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker1.TabIndex = 13;
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(525, 90);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(95, 17);
+            this.checkBox7.TabIndex = 20;
+            this.checkBox7.Tag = "7";
+            this.checkBox7.Text = "Ngày Công Bố";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChangedd);
             // 
-            // cbNgonNgu1
+            // checkBox6
             // 
-            this.cbNgonNgu1.FormattingEnabled = true;
-            this.cbNgonNgu1.Location = new System.Drawing.Point(345, 89);
-            this.cbNgonNgu1.Name = "cbNgonNgu1";
-            this.cbNgonNgu1.Size = new System.Drawing.Size(100, 21);
-            this.cbNgonNgu1.TabIndex = 1;
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(527, 20);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(93, 17);
+            this.checkBox6.TabIndex = 19;
+            this.checkBox6.Tag = "6";
+            this.checkBox6.Text = "Nhà Xuất Bản";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChangedd);
             // 
-            // txtTenSach1
+            // checkBox5
             // 
-            this.txtTenSach1.Location = new System.Drawing.Point(123, 159);
-            this.txtTenSach1.Name = "txtTenSach1";
-            this.txtTenSach1.Size = new System.Drawing.Size(342, 20);
-            this.txtTenSach1.TabIndex = 12;
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(254, 90);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(75, 17);
+            this.checkBox5.TabIndex = 18;
+            this.checkBox5.Tag = "5";
+            this.checkBox5.Text = "Ngôn Ngữ";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
-            // txtBookID1
+            // checkBox4
             // 
-            this.txtBookID1.Location = new System.Drawing.Point(91, 16);
-            this.txtBookID1.Name = "txtBookID1";
-            this.txtBookID1.Size = new System.Drawing.Size(100, 20);
-            this.txtBookID1.TabIndex = 11;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(254, 19);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(86, 17);
+            this.checkBox4.TabIndex = 17;
+            this.checkBox4.Tag = "4";
+            this.checkBox4.Text = "Tên Tác Giả";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
-            // txtISBN1
+            // checkBox2
             // 
-            this.txtISBN1.Location = new System.Drawing.Point(91, 89);
-            this.txtISBN1.Name = "txtISBN1";
-            this.txtISBN1.Size = new System.Drawing.Size(100, 20);
-            this.txtISBN1.TabIndex = 10;
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(18, 90);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(51, 17);
+            this.checkBox2.TabIndex = 16;
+            this.checkBox2.Tag = "2";
+            this.checkBox2.Text = "ISBN";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // txtTacGia1
+            // checkBox1
             // 
-            this.txtTacGia1.Location = new System.Drawing.Point(345, 18);
-            this.txtTacGia1.Name = "txtTacGia1";
-            this.txtTacGia1.Size = new System.Drawing.Size(100, 20);
-            this.txtTacGia1.TabIndex = 9;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(18, 18);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(62, 17);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Tag = "1";
+            this.checkBox1.Text = "BookID";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // txtNXB1
+            // btnTimKiem
             // 
-            this.txtNXB1.Location = new System.Drawing.Point(628, 18);
-            this.txtNXB1.Name = "txtNXB1";
-            this.txtNXB1.Size = new System.Drawing.Size(100, 20);
-            this.txtNXB1.TabIndex = 8;
+            this.btnTimKiem.Location = new System.Drawing.Point(527, 157);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.Size = new System.Drawing.Size(75, 23);
+            this.btnTimKiem.TabIndex = 14;
+            this.btnTimKiem.Text = "Tìm Kiếm";
+            this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
-            // radioButton7
+            // textBox7
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(18, 160);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(72, 17);
-            this.radioButton7.TabIndex = 7;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "Tên Sách";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
+            this.textBox7.Enabled = false;
+            this.textBox7.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.textBox7.Location = new System.Drawing.Point(628, 88);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(100, 20);
+            this.textBox7.TabIndex = 13;
             // 
-            // radioButton6
+            // textBox5
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(527, 19);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(92, 17);
-            this.radioButton6.TabIndex = 6;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Nhà Xuất Bản";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.textBox5.Enabled = false;
+            this.textBox5.FormattingEnabled = true;
+            this.textBox5.Items.AddRange(new object[] {
+            "ara",
+            "en-US",
+            "en-CA",
+            "en-GB",
+            "enm",
+            "eng",
+            "fre",
+            "ger",
+            "glg",
+            "grc",
+            "ita",
+            "jpn",
+            "lat",
+            "mul",
+            "nl",
+            "nor",
+            "por",
+            "swe",
+            "srp",
+            "spa",
+            "wel",
+            "zho"});
+            this.textBox5.Location = new System.Drawing.Point(345, 88);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 21);
+            this.textBox5.TabIndex = 1;
             // 
-            // radioButton5
+            // textBox3
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(527, 90);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(94, 17);
-            this.radioButton5.TabIndex = 5;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Ngày Công Bố";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.textBox3.Enabled = false;
+            this.textBox3.Location = new System.Drawing.Point(91, 155);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(354, 20);
+            this.textBox3.TabIndex = 12;
             // 
-            // radioButton4
+            // textBox1
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(254, 19);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(85, 17);
-            this.radioButton4.TabIndex = 4;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Tên Tác Giả";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(91, 16);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 11;
             // 
-            // radioButton3
+            // textBox2
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(254, 90);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(74, 17);
-            this.radioButton3.TabIndex = 3;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Ngôn Ngữ";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.textBox2.Enabled = false;
+            this.textBox2.Location = new System.Drawing.Point(91, 88);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 10;
             // 
-            // radioButton2
+            // textBox4
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(18, 90);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(50, 17);
-            this.radioButton2.TabIndex = 2;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "ISBN";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.textBox4.Enabled = false;
+            this.textBox4.Location = new System.Drawing.Point(345, 18);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 9;
             // 
-            // radioButton1
+            // textBox6
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(18, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(61, 17);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "BookID";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.textBox6.Enabled = false;
+            this.textBox6.Location = new System.Drawing.Point(628, 18);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 20);
+            this.textBox6.TabIndex = 8;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // QLSach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.Date1);
+            this.Controls.Add(this.TabControl);
             this.Name = "QLSach";
             this.Text = "Quản Lý Sách";
             this.Load += new System.EventHandler(this.QLSach_Load);
-            this.Date1.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewThongTin)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimKiem)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -508,7 +636,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl Date1;
+        private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridViewTimKiem;
@@ -532,23 +660,31 @@
         private System.Windows.Forms.TextBox txtNXB;
         private System.Windows.Forms.TextBox txtTenSach;
         private System.Windows.Forms.ComboBox cbNgonNgu;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TextBox txtTenSach1;
-        private System.Windows.Forms.TextBox txtBookID1;
-        private System.Windows.Forms.TextBox txtISBN1;
-        private System.Windows.Forms.TextBox txtTacGia1;
-        private System.Windows.Forms.TextBox txtNXB1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox cbNgonNgu1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnLoad;
-        private System.Windows.Forms.Button btnLoad1;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.DateTimePicker textBox7;
+        private System.Windows.Forms.ComboBox textBox5;
+        private System.Windows.Forms.Button btnTimKiem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button btnLamMoi;
+        private System.Windows.Forms.Button btnLamMoi1;
+        private System.Windows.Forms.TextBox txtFieldName4;
+        private System.Windows.Forms.TextBox txtFieldName1;
+        private System.Windows.Forms.TextBox txtFieldName5;
+        private System.Windows.Forms.TextBox txtFieldName6;
+        private System.Windows.Forms.TextBox txtFieldName7;
+        private System.Windows.Forms.TextBox txtFieldName3;
+        private System.Windows.Forms.TextBox txtFieldName2;
     }
 }
 
