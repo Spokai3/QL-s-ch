@@ -15,26 +15,19 @@ using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
+using System.Runtime.Remoting.Channels;
 
 namespace QL_sách
 {
     public partial class QLSach : Form
     {
-        IMongoCollection<Book> bookCollection;
-        private Dictionary<string, Control> fieldControlMap;
+        IMongoCollection<Book> bookCollection;        
         public QLSach()
         {
-            InitializeComponent();
-
-            string field1 = $"bookID";
-            string field2 = $"isbn";
-            string field3 = $"title";
-            string field4 = $"authors";
-            string field5 = $"language_code";
-            string field6 = $"publisher";
-            string field7 = $"publication_date";
-            
+            InitializeComponent();                       
         }
+
+
 
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -108,6 +101,8 @@ namespace QL_sách
             }
         }
 
+        /** Sửa dữ liệu trong DataBase **/
+
         public void SuaThongTin()
         {
             var filter = Builders<Book>.Filter.Eq(a => a.BookID, Int32.Parse(txtBookID.Text));
@@ -127,6 +122,8 @@ namespace QL_sách
             SuaThongTin();
         }
 
+        /** Click vào trong Cell để hiển thị thông tin lên các ô TextBox **/
+
         private void dataGridViewThongTin_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridViewThongTin.SelectedCells.Count > 0)
@@ -143,6 +140,8 @@ namespace QL_sách
             }
         }
 
+        /** Xóa Dữ liệu trong DataBase **/
+
         private async void btnXoa_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Bạn có muốn xóa", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -154,6 +153,7 @@ namespace QL_sách
             MessageBox.Show("Xóa thành công");
         }
 
+        /** Làm mới hết chữ trong TextBox trong Tab Thông Tin **/
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             txtBookID.Text = "";
@@ -165,7 +165,7 @@ namespace QL_sách
             Date.Text = "";
         }
 
-        /**Hien Thi Len DataGrid*/
+        /** Hien Thi DataBase Len DataGridView **/
         public void LoadBookData()
         {
             var filterDefinition = Builders<Book>.Filter.Empty;
@@ -187,7 +187,9 @@ namespace QL_sách
             LoadBookData();
         }
 
-        /** Tab Tim Kiem **/
+/* Tab Tim Kiem */
+
+        /** Kết nối TextBox với CheckBox**/
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             var checkBox = sender as CheckBox;
@@ -202,113 +204,10 @@ namespace QL_sách
                 {
                     textBox.Text = "";
                 }
-            }
-            
-
+            }            
         }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            var checkBox = sender as CheckBox;
-            int TextBoxNumber = Convert.ToInt32(checkBox.Tag);
-
-            TextBox textBox = Controls.Find("textBox" + TextBoxNumber, true)[0] as TextBox;
-            if (textBox != null)
-            {
-                textBox.Enabled = checkBox.Checked;
-
-                if (!textBox.Enabled)
-                {
-                    textBox.Text = "";
-                }
-            }
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            var checkBox = sender as CheckBox;
-            int TextBoxNumber = Convert.ToInt32(checkBox.Tag);
-
-            TextBox textBox = Controls.Find("textBox" + TextBoxNumber, true)[0] as TextBox;
-            if (textBox != null)
-            {
-                textBox.Enabled = checkBox.Checked;
-
-                if (!textBox.Enabled)
-                {
-                    textBox.Text = "";
-                }
-            }
-        }
-
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            var checkBox = sender as CheckBox;
-            int TextBoxNumber = Convert.ToInt32(checkBox.Tag);
-
-            TextBox textBox = Controls.Find("textBox" + TextBoxNumber, true)[0] as TextBox;
-            if (textBox != null)
-            {
-                textBox.Enabled = checkBox.Checked;
-
-                if (!textBox.Enabled)
-                {
-                    textBox.Text = "";
-                }
-            }
-        }
-
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            var checkBox = sender as CheckBox;
-            int TextBoxNumber = Convert.ToInt32(checkBox.Tag);
-
-            ComboBox textBox = Controls.Find("textBox" + TextBoxNumber, true)[0] as ComboBox;
-            if (textBox != null)
-            {
-                textBox.Enabled = checkBox.Checked;
-
-                if (!textBox.Enabled)
-                {
-                    textBox.Text = "";
-                }
-            }
-        }
-
-        private void checkBox6_CheckedChangedd(object sender, EventArgs e)
-        {
-            var checkBox = sender as CheckBox;
-            int TextBoxNumber = Convert.ToInt32(checkBox.Tag);
-
-            TextBox textBox = Controls.Find("textBox" + TextBoxNumber, true)[0] as TextBox;
-            if (textBox != null)
-            {
-                textBox.Enabled = checkBox.Checked;
-
-                if (!textBox.Enabled)
-                {
-                    textBox.Text = "";
-                }
-            }
-        }
-
-        private void checkBox7_CheckedChangedd(object sender, EventArgs e)
-        {
-            var checkBox = sender as CheckBox;
-            int TextBoxNumber = Convert.ToInt32(checkBox.Tag);
-
-            DateTimePicker textBox = Controls.Find("textBox" + TextBoxNumber, true)[0] as DateTimePicker;
-            if (textBox != null)
-            {
-                textBox.Enabled = checkBox.Checked;
-
-                if (!textBox.Enabled)
-                {
-                    textBox.Text = "";
-                }
-            }
-        }
-
+             
+        /** Làm mới hết chữ trong ô TextBox bên Tab Tìm kiếm **/
         private void btnLamMoi1_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
@@ -320,6 +219,7 @@ namespace QL_sách
             textBox7.Text = "";
         }
 
+        /** Chỉ được viết số trong TextBox BookID**/
         private void txtBookID_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
@@ -330,33 +230,50 @@ namespace QL_sách
             }
         }
 
+        /** Nút tìm kiếm **/
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            fieldNameMapping.Clear();
+            Timkiem();
+        }
+
+        public void Timkiem()
+        {
             var filterBuilder = Builders<Book>.Filter;
             var filter = filterBuilder.Empty;
+            var isbnFilter = new BsonRegularExpression($".*{textBox2.Text}.*", "i");
+            var nameFilter = new BsonRegularExpression($".*{textBox3.Text}.*", "i");
+            var authorFilter = new BsonRegularExpression($".*{textBox4.Text}.*", "i");
+            var nxbFilter = new BsonRegularExpression($".*{textBox6.Text}.*", "i");
             
 
-            for (int i=7; i <= 7; i++)
+            if (textBox1.Enabled)
             {
-                TextBox fieldNameTextBox = Controls.Find("txtFieldName" + i, true)[0] as TextBox;
-                fieldNameMapping[i] = fieldNameTextBox.Text;
+                filter &= filterBuilder.Eq(a => a.BookID, Int32.Parse(textBox1.Text));
             }
-
-            foreach (var kvp in fieldNameMapping)
+            if (textBox2.Enabled)
             {
-                int TextBoxNumber = kvp.Key;
-                string userDefinedFieldName = kvp.Value;
-
-                CheckBox checkBox = Controls.Find("checkBox" + TextBoxNumber, true)[0] as CheckBox;
-                TextBox textBox = Controls.Find("textBox" + TextBoxNumber, true)[0] as TextBox;
-                
-                if (checkBox.Checked && textBox.Enabled && !string.IsNullOrEmpty(textBox.Text))
-                {
-                    string databaseFieldName = userDefinedFieldName;
-                    filter &= filterBuilder.Eq(databaseFieldName, textBox.Text);
-                }
-            }           
+                filter &= filterBuilder.Regex(a => a.ISBN, isbnFilter.ToString());
+            }
+            if (textBox3.Enabled)
+            {
+                filter &= filterBuilder.Regex(a => a.Tên_Sách, nameFilter.ToString());
+            }
+            if (textBox4.Enabled)
+            {
+                filter &= filterBuilder.Regex(a => a.Tác_Giả, authorFilter.ToString());
+            }
+            if (textBox5.Enabled)
+            {
+                filter &= filterBuilder.Eq(a => a.Ngôn_Ngữ, textBox5.Text);
+            }
+            if (textBox6.Enabled)
+            {
+                filter &= filterBuilder.Regex(a => a.Nhà_Xuất_Bản, nxbFilter.ToString());
+            }
+            if (textBox7.Enabled)
+            {
+                filter &= filterBuilder.Regex(a => a.Ngày_Công_Bố, textBox7.Text);
+            }
 
             var results = bookCollection.Find(filter).ToList();
 
@@ -366,21 +283,8 @@ namespace QL_sách
             }
             else
             {
-                MessageBox.Show("Không thấy gì");
+                MessageBox.Show("Không tìm thấy dữ liệu");
             }
-        }
-
-        private void SetupFieldTextBoxMap()
-        {
-            fieldTextBoxMap = new Dictionary<string, TextBox> {
-                { "field1", textBox1 },
-                { "field2", textBox2 },
-                { "field3", textBox3 },
-                { "field4", textBox4 },
-                { "ComboBoxField", textBox5 },
-                { "field6", textBox6 },
-                { "field7", textBox7 }
-            };
         }
         
 

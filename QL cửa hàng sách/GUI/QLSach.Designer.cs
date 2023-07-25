@@ -52,13 +52,6 @@
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txtFieldName1 = new System.Windows.Forms.TextBox();
-            this.txtFieldName5 = new System.Windows.Forms.TextBox();
-            this.txtFieldName6 = new System.Windows.Forms.TextBox();
-            this.txtFieldName7 = new System.Windows.Forms.TextBox();
-            this.txtFieldName3 = new System.Windows.Forms.TextBox();
-            this.txtFieldName2 = new System.Windows.Forms.TextBox();
-            this.txtFieldName4 = new System.Windows.Forms.TextBox();
             this.dataGridViewTimKiem = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLamMoi1 = new System.Windows.Forms.Button();
@@ -323,13 +316,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.txtFieldName1);
-            this.tabPage2.Controls.Add(this.txtFieldName5);
-            this.tabPage2.Controls.Add(this.txtFieldName6);
-            this.tabPage2.Controls.Add(this.txtFieldName7);
-            this.tabPage2.Controls.Add(this.txtFieldName3);
-            this.tabPage2.Controls.Add(this.txtFieldName2);
-            this.tabPage2.Controls.Add(this.txtFieldName4);
             this.tabPage2.Controls.Add(this.dataGridViewTimKiem);
             this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -339,55 +325,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tìm kiếm sách";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // txtFieldName1
-            // 
-            this.txtFieldName1.Location = new System.Drawing.Point(24, 231);
-            this.txtFieldName1.Name = "txtFieldName1";
-            this.txtFieldName1.Size = new System.Drawing.Size(100, 20);
-            this.txtFieldName1.TabIndex = 29;
-            // 
-            // txtFieldName5
-            // 
-            this.txtFieldName5.Location = new System.Drawing.Point(447, 231);
-            this.txtFieldName5.Name = "txtFieldName5";
-            this.txtFieldName5.Size = new System.Drawing.Size(100, 20);
-            this.txtFieldName5.TabIndex = 28;
-            // 
-            // txtFieldName6
-            // 
-            this.txtFieldName6.Location = new System.Drawing.Point(553, 231);
-            this.txtFieldName6.Name = "txtFieldName6";
-            this.txtFieldName6.Size = new System.Drawing.Size(100, 20);
-            this.txtFieldName6.TabIndex = 27;
-            // 
-            // txtFieldName7
-            // 
-            this.txtFieldName7.Location = new System.Drawing.Point(659, 231);
-            this.txtFieldName7.Name = "txtFieldName7";
-            this.txtFieldName7.Size = new System.Drawing.Size(100, 20);
-            this.txtFieldName7.TabIndex = 26;
-            // 
-            // txtFieldName3
-            // 
-            this.txtFieldName3.Location = new System.Drawing.Point(235, 231);
-            this.txtFieldName3.Name = "txtFieldName3";
-            this.txtFieldName3.Size = new System.Drawing.Size(100, 20);
-            this.txtFieldName3.TabIndex = 25;
-            // 
-            // txtFieldName2
-            // 
-            this.txtFieldName2.Location = new System.Drawing.Point(130, 231);
-            this.txtFieldName2.Name = "txtFieldName2";
-            this.txtFieldName2.Size = new System.Drawing.Size(100, 20);
-            this.txtFieldName2.TabIndex = 24;
-            // 
-            // txtFieldName4
-            // 
-            this.txtFieldName4.Location = new System.Drawing.Point(341, 231);
-            this.txtFieldName4.Name = "txtFieldName4";
-            this.txtFieldName4.Size = new System.Drawing.Size(100, 20);
-            this.txtFieldName4.TabIndex = 23;
             // 
             // dataGridViewTimKiem
             // 
@@ -441,7 +378,7 @@
             this.checkBox3.Tag = "3";
             this.checkBox3.Text = "Tên Sách";
             this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -453,7 +390,7 @@
             this.checkBox7.Tag = "7";
             this.checkBox7.Text = "Ngày Công Bố";
             this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChangedd);
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox6
             // 
@@ -465,7 +402,7 @@
             this.checkBox6.Tag = "6";
             this.checkBox6.Text = "Nhà Xuất Bản";
             this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChangedd);
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox5
             // 
@@ -477,7 +414,7 @@
             this.checkBox5.Tag = "5";
             this.checkBox5.Text = "Ngôn Ngữ";
             this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox4
             // 
@@ -489,7 +426,7 @@
             this.checkBox4.Tag = "4";
             this.checkBox4.Text = "Tên Tác Giả";
             this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -501,7 +438,7 @@
             this.checkBox2.Tag = "2";
             this.checkBox2.Text = "ISBN";
             this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -626,7 +563,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTimKiem)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -678,13 +614,6 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.Button btnLamMoi1;
-        private System.Windows.Forms.TextBox txtFieldName4;
-        private System.Windows.Forms.TextBox txtFieldName1;
-        private System.Windows.Forms.TextBox txtFieldName5;
-        private System.Windows.Forms.TextBox txtFieldName6;
-        private System.Windows.Forms.TextBox txtFieldName7;
-        private System.Windows.Forms.TextBox txtFieldName3;
-        private System.Windows.Forms.TextBox txtFieldName2;
     }
 }
 
