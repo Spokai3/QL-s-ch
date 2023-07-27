@@ -375,11 +375,8 @@ namespace QL_sách
             }
 
             if (textBox7.Enabled)
-            {
-                if (textBox7.Text != "")
-                    filter &= filterBuilder.Regex(a => a.Ngày_Công_Bố, textBox7.Text);
-                else
-                    MessageBox.Show("Chưa chọn ngày công bố");
+            {                
+                    filter &= filterBuilder.Regex(a => a.Ngày_Công_Bố, textBox7.Text);                
             }
 
             var results = bookCollection.Find(filter).ToList();
