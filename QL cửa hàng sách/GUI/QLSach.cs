@@ -119,6 +119,10 @@ namespace QL_sách
         public void SuaThongTin()
         {
             var filter = Builders<Book>.Filter.Eq(a => a.BookID, Int32.Parse(txtBookID.Text));
+            var option = new UpdateOptions
+            {
+                IsUpsert = true,
+            };            
             var update = Builders<Book>.Update
                 .Set(a => a.ISBN, txtISBN.Text)
                 .Set(a => a.Tên_Sách, txtTenSach.Text)
@@ -126,9 +130,72 @@ namespace QL_sách
                 .Set(a => a.Ngôn_Ngữ, cbNgonNgu.Text)
                 .Set(a => a.Nhà_Xuất_Bản, txtNXB.Text)
                 .Set(a => a.Ngày_Công_Bố, Date.Text);
-            bookCollection.UpdateOne(filter, update);
-            LoadBookData();
-            MessageBox.Show("Sửa thành công");
+            var result = bookCollection.UpdateOne(filter, update, option);
+            
+            if (txtBookID.Text != "")
+            {
+                if (txtISBN.Text != "")
+                {
+                    if (txtTenSach.Text != "")
+                    {
+                        if (txtTacGia.Text != "")
+                        {
+                            if (cbNgonNgu.Text != "")
+                            {
+                                if (txtNXB.Text != "")
+                                {
+                                    if (Date.Text != "")
+                                    {
+                                        if (result.IsModifiedCountAvailable && result.ModifiedCount == 0)
+                                        {
+                                            LoadBookData();
+                                            MessageBox.Show("Thêm thành công");
+                                        }
+                                        else
+                                        {
+                                            LoadBookData();
+                                            MessageBox.Show("Sửa thành công");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Chưa chọn ngày công bố");
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Chưa nhập nhà xuất bản");
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Chưa chọn ngôn ngữ");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Chưa nhập tên tác giả");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Chưa nhập tên sách");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Chưa nhập mã ISBN");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Chưa nhập mã ID sách");
+            }
+            
+            
+            /*bookCollection.UpdateOne(filter, update);*/
+            /*LoadBookData();
+            MessageBox.Show("Sửa thành công");*/
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -162,9 +229,10 @@ namespace QL_sách
             {
                 var filter = Builders<Book>.Filter.Eq(a => a.BookID, Int32.Parse(txtBookID.Text));
                 bookCollection.DeleteOne(filter);
+                LoadBookData();
+                MessageBox.Show("Xóa thành công");
             }
-            LoadBookData();
-            MessageBox.Show("Xóa thành công");
+            
         }
 
         /** Làm mới hết chữ trong TextBox trong Tab Thông Tin **/
@@ -260,31 +328,58 @@ namespace QL_sách
 
             if (textBox1.Enabled)
             {
-                filter &= filterBuilder.Eq(a => a.BookID, Int32.Parse(textBox1.Text));
+                if (textBox1.Text != "")               
+                    filter &= filterBuilder.Eq(a => a.BookID, Int32.Parse(textBox1.Text));                
+                else                
+                    MessageBox.Show("Chưa nhập mã ID sách");                                
             }
+
             if (textBox2.Enabled)
             {
-                filter &= filterBuilder.Regex(a => a.ISBN, isbnFilter.ToString());
+                if (textBox2.Text != "")                
+                    filter &= filterBuilder.Regex(a => a.ISBN, isbnFilter.ToString());                
+                else                
+                    MessageBox.Show("Chưa nhập mã ISBN");                                
             }
+
             if (textBox3.Enabled)
             {
-                filter &= filterBuilder.Regex(a => a.Tên_Sách, nameFilter.ToString());
+                if (textBox3.Text != "")                
+                    filter &= filterBuilder.Regex(a => a.Tên_Sách, nameFilter.ToString());                
+                else                
+                    MessageBox.Show("Chưa nhập tên sách");                
             }
+
             if (textBox4.Enabled)
             {
-                filter &= filterBuilder.Regex(a => a.Tác_Giả, authorFilter.ToString());
+                if (textBox4.Text != "")
+                    filter &= filterBuilder.Regex(a => a.Tác_Giả, authorFilter.ToString());
+                else                
+                    MessageBox.Show("Chưa nhập tên tác giả");                
             }
+
             if (textBox5.Enabled)
             {
-                filter &= filterBuilder.Eq(a => a.Ngôn_Ngữ, textBox5.Text);
+                if (textBox5.Text != "")
+                    filter &= filterBuilder.Eq(a => a.Ngôn_Ngữ, textBox5.Text);
+                else
+                    MessageBox.Show("Chưa chọn ngôn ngữ");
             }
+
             if (textBox6.Enabled)
             {
-                filter &= filterBuilder.Regex(a => a.Nhà_Xuất_Bản, nxbFilter.ToString());
+                if (textBox6.Text != "")
+                    filter &= filterBuilder.Regex(a => a.Nhà_Xuất_Bản, nxbFilter.ToString());
+                else
+                    MessageBox.Show("Chưa nhập nhà xuất bản");
             }
+
             if (textBox7.Enabled)
             {
-                filter &= filterBuilder.Regex(a => a.Ngày_Công_Bố, textBox7.Text);
+                if (textBox7.Text != "")
+                    filter &= filterBuilder.Regex(a => a.Ngày_Công_Bố, textBox7.Text);
+                else
+                    MessageBox.Show("Chưa chọn ngày công bố");
             }
 
             var results = bookCollection.Find(filter).ToList();

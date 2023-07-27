@@ -555,7 +555,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.TabControl);
             this.Name = "QLSach";
-            this.Text = "Quản Lý Sách";
+            this.Text = "Quản Lý Sách - Bồ Anh Kiệt";
             this.Load += new System.EventHandler(this.QLSach_Load);
             this.TabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
