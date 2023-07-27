@@ -36,6 +36,13 @@ namespace QL_sách
 
         public void DienThongTin()
         {
+            var filter = Builders<Book>.Filter.Eq(a => a.BookID, Int32.Parse(txtBookID.Text));
+            var update = Builders<Book>.Update.SetOnInsert(a => a.BookID, Int32.Parse(txtBookID.Text));
+            var option = new FindOneAndUpdateOptions<Book>
+            {
+                IsUpsert = true,
+            };
+            var result = bookCollection.FindOneAndUpdate(filter, update, option);
             if (txtBookID.Text != "")
             {
                 if (txtISBN.Text != "")
@@ -50,20 +57,26 @@ namespace QL_sách
                                 {
                                     if (Date.Text != "")
                                     {
-                                        var book = new Book
+                                        if (result == null)
                                         {
-                                            BookID = Int32.Parse(txtBookID.Text),
-                                            ISBN = txtISBN.Text,
-                                            Tên_Sách = txtTenSach.Text,
-                                            Tác_Giả = txtTacGia.Text,
-                                            Ngôn_Ngữ = cbNgonNgu.Text,
-                                            Nhà_Xuất_Bản = txtNXB.Text,
-                                            Ngày_Công_Bố = Date.Text
-                                        };
-                                        bookCollection.InsertOne(book);
-                                        LoadBookData();
-                                        /*dataGridViewThongTin.Rows.Add(txtBookID.Text, txtISBN.Text, txtTenSach.Text, txtTacGia.Text, cbNgonNgu.Text, txtNXB.Text, Date.Text);*/
-                                        MessageBox.Show("Thêm thành công");
+                                            var book = new Book
+                                            {
+                                                BookID = Int32.Parse(txtBookID.Text),
+                                                ISBN = txtISBN.Text,
+                                                Tên_Sách = txtTenSach.Text,
+                                                Tác_Giả = txtTacGia.Text,
+                                                Ngôn_Ngữ = cbNgonNgu.Text,
+                                                Nhà_Xuất_Bản = txtNXB.Text,
+                                                Ngày_Công_Bố = Date.Text
+                                            };
+                                            bookCollection.InsertOne(book);
+                                            LoadBookData();                                            
+                                            MessageBox.Show("Thêm thành công");
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Dữ liệu đã tồn tại không thể thêm");
+                                        }                                        
                                     }
                                     else
                                     {
@@ -115,6 +128,7 @@ namespace QL_sách
                 .Set(a => a.Ngày_Công_Bố, Date.Text);
             bookCollection.UpdateOne(filter, update);
             LoadBookData();
+            MessageBox.Show("Sửa thành công");
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -171,8 +185,7 @@ namespace QL_sách
             var filterDefinition = Builders<Book>.Filter.Empty;
             var sort = Builders<Book>.Sort.Ascending("bookID");
             var books = bookCollection.Find(filterDefinition).Sort(sort).ToList();
-            dataGridViewThongTin.DataSource = books;
-            /*dataGridViewTimKiem.DataSource = books;*/
+            dataGridViewThongTin.DataSource = books;            
         }
 
         /** Ket Noi DataBase **/
@@ -183,7 +196,6 @@ namespace QL_sách
             var mongoClient = new MongoClient(connectionString);
             var database = mongoClient.GetDatabase(databaseName);
             bookCollection = database.GetCollection<Book>("book");
-
             LoadBookData();
         }
 
