@@ -2,20 +2,9 @@
 using MongoDB.Driver;
 using QL_cửa_hàng_sách;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Configuration;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MongoDB.Driver;
-using MongoDB.Driver.Core.Configuration;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text.RegularExpressions;
-using System.Runtime.Remoting.Channels;
 
 namespace QL_sách
 {
