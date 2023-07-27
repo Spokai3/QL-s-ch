@@ -16,8 +16,6 @@ namespace QL_sách
             InitializeComponent();                       
         }
 
-
-
         private void btnThem_Click(object sender, EventArgs e)
         {
             DienThongTin();
@@ -179,12 +177,7 @@ namespace QL_sách
             else
             {
                 MessageBox.Show("Chưa nhập mã ID sách");
-            }
-            
-            
-            /*bookCollection.UpdateOne(filter, update);*/
-            /*LoadBookData();
-            MessageBox.Show("Sửa thành công");*/
+            }                                    
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -352,36 +345,44 @@ namespace QL_sách
             {
                 if (textBox1.Text != "")               
                     filter &= filterBuilder.Eq(a => a.BookID, Int32.Parse(textBox1.Text));                
-                else                
+                else
+                {
                     MessageBox.Show("Chưa nhập mã ID sách");
-                return;
+                    return;
+                }
             }
 
             if (textBox2.Enabled)
             {
                 if (textBox2.Text != "")                
                     filter &= filterBuilder.Regex(a => a.ISBN, isbnFilter.ToString());                
-                else                
+                else
+                {
                     MessageBox.Show("Chưa nhập mã ISBN");
-                return;
+                    return;
+                }
             }
 
             if (textBox3.Enabled)
             {
                 if (textBox3.Text != "")                
                     filter &= filterBuilder.Regex(a => a.Tên_Sách, nameFilter.ToString());                
-                else                
-                    MessageBox.Show("Chưa nhập tên sách");   
-                return;
+                else
+                {
+                    MessageBox.Show("Chưa nhập tên sách");
+                    return;
+                }
             }
 
             if (textBox4.Enabled)
             {
                 if (textBox4.Text != "")
                     filter &= filterBuilder.Regex(a => a.Tác_Giả, authorFilter.ToString());
-                else                
-                    MessageBox.Show("Chưa nhập tên tác giả");   
-                return;
+                else
+                {
+                    MessageBox.Show("Chưa nhập tên tác giả");
+                    return;
+                }
             }
 
             if (textBox5.Enabled)
@@ -389,8 +390,11 @@ namespace QL_sách
                 if (textBox5.Text != "")
                     filter &= filterBuilder.Eq(a => a.Ngôn_Ngữ, textBox5.Text);
                 else
+                {
                     MessageBox.Show("Chưa chọn ngôn ngữ");
-                return;
+                    return;
+                }
+                    
             }
 
             if (textBox6.Enabled)
@@ -398,8 +402,11 @@ namespace QL_sách
                 if (textBox6.Text != "")
                     filter &= filterBuilder.Regex(a => a.Nhà_Xuất_Bản, nxbFilter.ToString());
                 else
+                {
                     MessageBox.Show("Chưa nhập nhà xuất bản");
-                return;
+                    return;
+                }
+                    
             }
 
             if (textBox7.Enabled)
@@ -415,7 +422,8 @@ namespace QL_sách
             }
             else
             {
-                MessageBox.Show("Không tìm thấy dữ liệu");
+                dataGridViewTimKiem.DataSource = results;
+                MessageBox.Show("Không tìm thấy dữ liệu");                
             }
         }
         
