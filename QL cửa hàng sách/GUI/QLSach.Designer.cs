@@ -390,7 +390,7 @@
             this.checkBox7.Tag = "7";
             this.checkBox7.Text = "Ngày Công Bố";
             this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.ForDate_CheckedChanged);
             // 
             // checkBox6
             // 
@@ -414,7 +414,7 @@
             this.checkBox5.Tag = "5";
             this.checkBox5.Text = "Ngôn Ngữ";
             this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.ForcomboBox_CheckedChanged);
             // 
             // checkBox4
             // 
