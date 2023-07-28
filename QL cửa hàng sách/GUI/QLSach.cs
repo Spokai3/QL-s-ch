@@ -271,36 +271,16 @@ namespace QL_sách
 
         private void ForcomboBox_CheckedChanged(object sender, EventArgs e)
         {
-            var checkBox = sender as CheckBox;
-            int ComboBoxNumber = Convert.ToInt32(checkBox.Tag);
-
-            ComboBox comboBox = Controls.Find("textBox" + ComboBoxNumber, true)[0] as ComboBox;
-            if (comboBox != null)
-            {
-                comboBox.Enabled = checkBox.Checked;
-
-                if (!comboBox.Enabled)
-                {
-                    comboBox.Text = "";
-                }
-            }
+            textBox5.Enabled = checkBox5.Checked;
+            if (!textBox5.Enabled)
+                textBox5.Text = "";
         }
 
         private void ForDate_CheckedChanged(object sender, EventArgs e)
         {
-            var checkBox = sender as CheckBox;
-            int dateNumber = Convert.ToInt32(checkBox.Tag);
-
-            DateTimePicker date = Controls.Find("textBox" + dateNumber, true)[0] as DateTimePicker;
-            if (date != null)
-            {
-                date.Enabled = checkBox.Checked;
-
-                if (!date.Enabled)
-                {
-                    date.Text = "";
-                }
-            }
+            textBox7.Enabled = checkBox7.Checked;
+            if (!textBox7.Enabled)
+                textBox7.Text = "";
         }
 
         /** Làm mới hết chữ trong ô TextBox bên Tab Tìm kiếm **/
@@ -336,6 +316,7 @@ namespace QL_sách
         {
             var filterBuilder = Builders<Book>.Filter;
             var filter = filterBuilder.Empty;
+            var sort = Builders<Book>.Sort.Ascending("bookID");
             var isbnFilter = new BsonRegularExpression($".*{textBox2.Text}.*", "i");
             var nameFilter = new BsonRegularExpression($".*{textBox3.Text}.*", "i");
             var authorFilter = new BsonRegularExpression($".*{textBox4.Text}.*", "i");
@@ -350,7 +331,7 @@ namespace QL_sách
                     MessageBox.Show("Chưa nhập mã ID sách");
                     return;
                 }
-            }
+            }            
 
             if (textBox2.Enabled)
             {
@@ -361,7 +342,7 @@ namespace QL_sách
                     MessageBox.Show("Chưa nhập mã ISBN");
                     return;
                 }
-            }
+            }            
 
             if (textBox3.Enabled)
             {
@@ -372,7 +353,7 @@ namespace QL_sách
                     MessageBox.Show("Chưa nhập tên sách");
                     return;
                 }
-            }
+            }            
 
             if (textBox4.Enabled)
             {
@@ -383,7 +364,7 @@ namespace QL_sách
                     MessageBox.Show("Chưa nhập tên tác giả");
                     return;
                 }
-            }
+            }            
 
             if (textBox5.Enabled)
             {
@@ -394,8 +375,7 @@ namespace QL_sách
                     MessageBox.Show("Chưa chọn ngôn ngữ");
                     return;
                 }
-                    
-            }
+            }            
 
             if (textBox6.Enabled)
             {
@@ -405,16 +385,15 @@ namespace QL_sách
                 {
                     MessageBox.Show("Chưa nhập nhà xuất bản");
                     return;
-                }
-                    
-            }
+                }                    
+            }            
 
             if (textBox7.Enabled)
             {                
                     filter &= filterBuilder.Regex(a => a.Ngày_Công_Bố, textBox7.Text);                
-            }
+            }            
 
-            var results = bookCollection.Find(filter).ToList();
+            var results = bookCollection.Find(filter).Sort(sort).ToList();
 
             if (results.Count > 0)
             {
